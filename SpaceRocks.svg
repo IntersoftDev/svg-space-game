@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>UFO-Infested Space Rocks (SVG)</title>
+    <link rel="Stylesheet" type="text/css" href="game.css" />
+</head>
+<body onload="StartGame()">
+    <div id="gamediv">
+        <svg id="svgroot" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="patternGravDustCloud" x="0" y="0" width="5" height="5" patternUnits="userSpaceOnUse" >
+                    <circle cx="3" cy="3" r="1" />
+                </pattern>
+            </defs>
+            <symbol id="LifeIndicator">
+                <polygon class="lives-indicator" points="0,20 16,20 8,0"/>
+            </symbol>
+            <symbol id="shieldStrength">
+                <rect class="ss-bg-rect" />
+                <rect id="shieldPctBar" class="ss-fill" />
+            </symbol>
+            <symbol id="warpW">
+                <polyline points="1,3 4,11 7,3 10,11 13,3" />
+            </symbol>
+            <symbol id="WarpIndicators">
+                <g class="warp-indicator">
+                    <rect class="ss-bg-rect" />
+                    <use href="#warpW" id="warp1" x="4" y="0" />
+                    <use href="#warpW" id="warp2" x="21" y="0" />
+                    <use href="#warpW" id="warp3" x="37" y="0" />
+                </g>
+            </symbol>
+            <symbol id="rockCloudL">
+                <circle class="rock-grav-dust-ring" cx="42" cy="42" r="42" />
+            </symbol>
+            <symbol id="rockCloudM">
+                <circle class="rock-grav-dust-ring" cx="25" cy="25" r="25" />
+            </symbol>
+            <symbol id="rockCloudS">
+                <circle class="rock-grav-dust-ring" cx="14" cy="14" r="14" />
+            </symbol>
+            <symbol id="explodeRockL">
+                <circle class="rock-explosionL" cx="42" cy="42" r="0" />
+            </symbol>
+            <symbol id="explodeRockM">
+                <circle class="rock-explosionM" cx="25" cy="25" r="0" />
+            </symbol>
+            <symbol id="explodeRockS">
+                <circle class="rock-explosionS" cx="14" cy="14" r="0" />
+            </symbol>
+            <symbol id="shipsym" >
+                <g>
+                    <polygon class="ship" points="1,12 16,18 18,22 8,22 8,23 23,23 23,19 20,15 20,9 23,5 23,1 8,1 8,2 18,2 16,6"/>
+                    <polygon id="shipsymflame" class="flame" points="22,9 22,15 29,12" />
+                </g>
+            </symbol>
+            <symbol id="explodeShip">
+                <circle class="ship-explosion" cx="36" cy="36" r="0" />
+            </symbol>
+            <symbol id="UFO-L">
+                <g class="ufo">
+                    <polygon class="ufo-fill" points="7,17 4,4 16,10 13,15"/>
+                    <polygon class="ufo-fill" points="7,31 4,44 16,38 35,33"/>
+                    <polygon class="ufo-fill" points="41,17 44,4 32,10 35,15"/>
+                    <polygon class="ufo-fill" points="41,31 44,44 32,38 35,33"/>
+                    <ellipse cx="24" cy="24" rx="10" ry="22" />
+                    <ellipse cx="24" cy="24" rx="22" ry="10" />
+                    <circle cx="12" cy="24" r="4" />
+                    <circle id="alt" cx="24" cy="24" r="4" />
+                    <circle cx="36" cy="24" r="4" />
+                </g>
+            </symbol>
+            <symbol id="explodeUFO-L">
+                <circle class="ufo-explosion-L" cx="36" cy="36" r="0" />
+            </symbol>
+            <symbol id="UFO-S">
+                <g class="ufo">
+                    <ellipse cx="12" cy="12" rx="6" ry="11" />
+                    <ellipse cx="12" cy="12" rx="11" ry="7" />
+                    <circle cx="5" cy="12" r="3" />
+                    <circle id="alt" cx="12" cy="12" r="3" />
+                    <circle cx="19" cy="12" r="3" />
+                </g>
+            </symbol>
+            <symbol id="explodeUFO-S">
+                <circle class="ufo-explosion-S" cx="18" cy="18" r="0" />
+            </symbol>
+            <symbol id="introBlock">
+                <text id="gameIntro" x="50" y="50">UFO-Infested Space Rocks</text>
+                <text x="155" y="75">© 2020 Mike Eberhart — https://suretalent.blogspot.com/</text>
+                <text class="instructions" y="90" xml:space="preserve">
+                    <tspan x="0" dy="0">Keyboard Controls:</tspan>
+                    <tspan x="40" dy="24">N: Start New Game</tspan>
+                    <tspan x="40" dy="24">↑   ↓  (Arrow Keys): Forward / Retro Thrusters</tspan>
+                    <tspan x="40" dy="20">← → (Arrow Keys): Rotate Ship</tspan>
+                    <tspan x="40" dy="20">Spacebar: Fire Weapon</tspan>
+                    <tspan x="40" dy="24">S:  Shield Toggle —— new ship has 100% shield; partial recharge at level-completion.</tspan>
+                    <tspan x="40" dy="20">W: Warp Jump    —— HyperSpace to random position. New ship has 3; 1 extra per level.</tspan>
+                    <tspan x="0" dy="40">XBOX 360 Gamepad support after Game started with keyboard-N:</tspan>
+                    <tspan x="40" dy="20">Right-Stick steers, Right-Trigger shoots, Left-Trigger toggle shield, Left-Top Shoulder warp.</tspan>
+                    <tspan x="0" dy="40">Scoring (with Bonus Ships at 10K, 50K, 100K, 250K, 500K, 1 million) :</tspan>
+                    <tspan x="40" dy="24">Rocks: Large, Medium, Small —— 20, 50, 100 points</tspan>
+                    <tspan x="40" dy="24">UFOs ——  Large = 200 points  ——   Small = 1000 points</tspan>
+                    <tspan x="0" dy="80">Note:  As game progresses, UFOs increase in number, frequency, and velocity with improved shot-accuracy;</tspan>
+                    <tspan x="40" dy="24">Rocks  increase in number and gain velocity.  Player shield depletion-rate increases.</tspan>
+                </text>
+                <use href="#UFO-L" id="lgUFOTest" x="150" y="380" />
+                <use href="#UFO-S" id="lgUFOTest" x="330" y="380" />
+            </symbol>
+            <image id="movingObjInsertPoint" display="none" style="z-index:-100"/>
+            <use href="#introBlock" id="introBlockText" x="180" y="50" />
+            <text id="gameOver"  x="330"  y="365" display="none">GAME OVER!</text>
+            <text id="score"     x="700"  y="10">Score: 0</text>
+            <text id="highScore" x="400"  y="10">High Score:</text>
+            <use href="#LifeIndicator" id="livesRemaining1" x="10" y="10" />
+            <use href="#LifeIndicator" id="livesRemaining2" x="32" y="10" />
+            <use href="#LifeIndicator" id="livesRemaining3" x="54" y="10" />
+            <use href="#LifeIndicator" id="livesRemaining4" x="76" y="10" />
+            <text id="lblShield" x="107" y="10">Shield</text>
+            <text id="lblWarp " x="185" y="10">Warp</text>
+            <use href="#WarpIndicators" id="warps" x="175" y="16" />
+            <use href="#shieldStrength" id="shieldRemaining" x="100" y="16" />
+            <text id="level" display="none" x="400" y="250">Level: </text>
+            <circle id="shipShield" class="shield" display="none" />
+            <use href="#shipsym" id="spaceship" x="400" y="300" display="none" />
+        </svg>
+    </div>
+    <script src="vec2d.js"/>
+    <script src="game.js"/>
+</body>
+</html>

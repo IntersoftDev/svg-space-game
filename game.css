@@ -1,0 +1,364 @@
+﻿body
+{
+    padding: 0;
+    margin: 0;
+    background-color: #444;
+    font-family: 'Segoe UI' , Verdana, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 10pt;
+    font-weight: normal;
+    color: gold;
+}
+
+svg
+{
+    font-size: 14px;
+    overflow: visible;
+    width: 900px;
+    height: 600px;
+    background-color: #333;
+    margin: 12px;
+    border-radius: 10px;
+    border: 2px solid #000;
+}
+
+text {
+    stroke: white;
+}
+
+text.instructions {
+    stroke: gold;
+}
+
+text#gameOver, text#gameIntro  {
+    font-size: 40px;
+    stroke: red;
+    stroke-width: 2px;
+}
+
+text#level {
+    stroke: mediumpurple;
+    fill: mediumpurple;
+    font-size: 30px;
+}
+
+.ufo, .ufo-s {
+    stroke: magenta;
+    stroke-width: 2px;
+    stroke-linejoin: round;
+}
+
+.ufo-s {
+    stroke: red;
+}
+
+.ufo-fill {
+    stroke: lightgray;
+    fill: blueviolet;
+}
+
+.ufo circle {
+    color: peru;
+    stroke: chocolate;
+    animation: ufo-portal-anim .5s infinite linear;
+}
+
+@keyframes ufo-portal-anim {
+    from {
+        fill: black;
+    }
+    to {
+        fill: white;
+    }
+}
+
+.ufo circle#alt {
+    animation: ufo-portal2-anim .5s infinite linear;
+}
+
+@keyframes ufo-portal2-anim {
+    from {
+        fill: white;
+    }
+    to {
+        fill: black;
+    }
+}
+
+.ufo-shot {
+    stroke: red;
+    fill: magenta;
+    r: 3;
+    animation: ufo-shot-anim .25s infinite linear;
+}
+
+@keyframes ufo-shot-anim {
+    from {
+        stroke-width: 0;
+    }
+    to {
+        stroke-width: 4px;
+    }
+}
+
+.ufo-explosion-L, .ufo-explosion-S {
+    fill-opacity: .6;
+    stroke-width: 4px;
+    stroke-dasharray: 2 4;
+}
+
+.ufo-explosion-L {
+    animation: ufo-explosion-anim-L 500ms linear infinite;
+}
+
+.ufo-explosion-S {
+    animation: ufo-explosion-anim-S 500ms linear infinite;
+}
+
+@keyframes ufo-explosion-anim-L {
+    0% {
+        stroke: white;
+        stroke-opacity: 1;
+        fill: magenta;
+        r: 0;
+    }
+    50% {
+        stroke-opacity: .2;
+    }
+    100% {
+        stroke-opacity: 0;
+        fill-opacity: 0;
+        fill: white;
+        r: 36;
+    }
+}
+
+@keyframes ufo-explosion-anim-S {
+    0% {
+        stroke: white;
+        stroke-opacity: 1;
+        fill: red;
+        r: 0;
+    }
+    50% {
+        stroke-opacity: .2;
+    }
+    100% {
+        stroke-opacity: 0;
+        fill-opacity: 0;
+        fill: white;
+        r: 18;
+    }
+}
+
+.ship {
+    stroke: white;
+    stroke-width: 1.5px;
+    stroke-linejoin: round;
+    fill: dodgerblue;
+}
+
+.flame {
+    stroke: red;
+    stroke-width: 2px;
+    stroke-opacity: .5;
+    stroke-linejoin: round;
+    fill: orange;
+    fill-opacity: .8;
+}
+
+/*Default to no thrust-flame on ship-regeneration*/
+#shipsymflame {
+    display: none;
+}
+
+.ship-shot {
+    fill: springgreen;
+    r: 3;
+}
+
+.ship-explosion  {
+    fill-opacity: .6;
+    stroke-width: 4px;
+    stroke-dasharray: 2 4;
+    animation: ship-explosion-anim 500ms linear infinite;
+}
+
+@keyframes ship-explosion-anim {
+    0% {
+        stroke: white;
+        stroke-opacity: 1;
+        fill: dodgerblue;
+        r: 0;
+    }
+    50% {
+        stroke-opacity: .2;
+    }
+    100% {
+        stroke-opacity: 0;
+        fill-opacity: 0;
+        fill: white;
+        r: 36;
+    }
+}
+
+
+.rock {
+    fill: #666;
+    fill-opacity: .9;
+    stroke: gold;
+    stroke-width: 1px;
+    stroke-opacity: 1.0;
+    stroke-linejoin: round;
+}
+
+.ship-fragment {
+    stroke: orange;
+    stroke-width: 2px;
+    stroke-opacity: .5;
+}
+
+
+#patternGravDustCloud {
+    stroke: none;
+    fill: #AAA;
+    fill-opacity: .4;
+}
+
+#rockCloudL, #rockCloudM, #rockCloudS {
+    fill: url(#patternGravDustCloud);
+    stroke: #777;
+    stroke-opacity: .7;
+    stroke-width: 1px;
+    stroke-dasharray: 4;
+    animation: cloud-edge-move 5s infinite linear;
+}
+
+@keyframes cloud-edge-move {
+    to {
+        stroke-dashoffset: 100;
+    }
+}
+
+.shield {
+    fill: aliceblue;
+    fill-opacity: .3;
+    stroke-width: 1px;
+    stroke: blue;
+    stroke-opacity: 1.0;
+    animation: shield-radius 1s infinite linear;
+}
+
+@keyframes shield-radius {
+    from {
+        r: 15;
+    }
+    to {
+        r: 25;
+    }
+}
+
+#shieldStrength {
+    height: 20px;
+}
+
+.ss-bg-rect {
+    width:  54px;
+    height: 14px;
+    stroke: white;
+    stroke-width: 1px;
+}
+
+.ss-fill {
+    x: 1px;
+    y: 2px;
+    height: 10px;
+    fill: dodgerblue;
+    stroke: none;
+}
+
+text#shield {
+    stroke-width: 0;
+    fill: aliceblue;
+}
+
+.lives-indicator {
+    stroke: dodgerblue;
+}
+
+
+.warp-indicator circle {
+    stroke: dodgerblue;
+    stroke-width: 2px;
+    fill: black;
+}
+
+.warp-indicator line, polyline {
+    stroke: dodgerblue;
+    stroke-width: 2px;
+}
+
+.rock-explosionL, .rock-explosionM, .rock-explosionS  {
+    fill-opacity: .5;
+    stroke-width: 2px;
+    stroke-dasharray: 4 4;
+}
+
+.rock-explosionL {
+    animation:
+            rock-explosion-anim  500ms linear infinite,
+            rock-explosion-animL 500ms linear infinite;
+}
+.rock-explosionM {
+    animation:
+            rock-explosion-anim  500ms linear infinite,
+            rock-explosion-animM 500ms linear infinite;
+}
+.rock-explosionS {
+    animation:
+            rock-explosion-anim  500ms linear infinite,
+            rock-explosion-animS 500ms linear infinite;
+}
+
+@keyframes rock-explosion-anim {
+    0% {
+        stroke: gold;
+        stroke-opacity: .6;
+        fill: red;
+    }
+    50% {
+        stroke-opacity: .2;
+    }
+    100% {
+        stroke-opacity: 0;
+        fill-opacity: 0;
+        fill: orange;
+    }
+}
+
+@keyframes rock-explosion-animL {
+    0% {
+        r: 0;
+    }
+    100% {
+        r: 42;
+    }
+}
+
+@keyframes rock-explosion-animM {
+    0% {
+        r: 0;
+    }
+    100% {
+        r: 25;
+    }
+}
+
+@keyframes rock-explosion-animS {
+    0% {
+        r: 0;
+    }
+    100% {
+        r: 14;
+    }
+}
